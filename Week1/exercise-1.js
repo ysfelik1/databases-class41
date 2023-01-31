@@ -8,7 +8,7 @@ var connection = mysql.createConnection({
 
 connection.connect();
 //creates database for each running
-const createDatabase = `CREATE DATABASE IF NOT EXISTS meetup;use meetup;DROP TABLE IF EXISTS invitee;`
+const databaseMeetup = `CREATE DATABASE IF NOT EXISTS meetup;use meetup;DROP TABLE IF EXISTS invitee;`
 //creates invitee table and adds 5 row in it for each running
 const tableInvitee = `CREATE TABLE invitee(invitee_no INT  PRIMARY KEY AUTO_INCREMENT,
   invitee_name CHAR(100) NOT NULL, invited_by INT NOT NULL );
@@ -50,7 +50,7 @@ const tableMeeting = `SET FOREIGN_KEY_CHECKS=0;
  INSERT INTO meeting (meeting_title,starting_time,ending_time,room_no) VALUES('ART','2023-04-30 09:00:00','2023-04-30 11:00:00',4);
  `
 
-connection.query(createDatabase, function (error, results, fields) {
+connection.query(databaseMeetup+tableInvitee+tableRoom+tableMeeting, function (error, results, fields) {
   if (error) throw error;
   console.log('Queries completed');
 });
