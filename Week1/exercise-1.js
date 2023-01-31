@@ -50,7 +50,7 @@ const tableMeeting = `SET FOREIGN_KEY_CHECKS=0;
  INSERT INTO meeting (meeting_title,starting_time,ending_time,room_no) VALUES('ART','2023-04-30 09:00:00','2023-04-30 11:00:00',4);
  `
 
-connection.query(databaseMeetup+tableInvitee+tableRoom+tableMeeting, function (error, results, fields) {
+connection.query(databaseMeetup+tableInvitee+tableRoom+tableMeeting, function (error) {
   if (error) throw error;
   console.log('Queries completed');
 });

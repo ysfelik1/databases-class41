@@ -41,7 +41,7 @@ const executeQuery = (selectQuery,question) => {
     });
 
     connection.connect();
-    connection.query(selectQuery, function (error, results, fields) {
+    connection.query(selectQuery, function (error, results) {
         if (error) throw error;
         console.log(question)
         console.table(results);
