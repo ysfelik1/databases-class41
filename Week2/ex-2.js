@@ -9,7 +9,7 @@ const connection = mysql.createConnection({
 
 let authorsPapersInsert = '';
 
-for (let i = 0; i < 29; i++) {
+for (let i = 0; i <29; i++) {
     let randomAuthorId = Math.floor(Math.random() * 15)+1;
     let randomPaperId = Math.floor(Math.random() * 30)+1;
     authorsPapersInsert += `INSERT INTO authors_papers(paper_id,author_id) VALUES(${randomPaperId},${randomAuthorId});`
@@ -67,12 +67,12 @@ INSERT INTO authors(author_name,university,date_of_birth,h_index,gender,mentor_i
 INSERT INTO authors(author_name,university,date_of_birth,h_index,gender,mentor_id) VALUES('Yusuf GOREN','YALE','1989-10-23',44,'Male',4);
 INSERT INTO authors(author_name,university,date_of_birth,h_index,gender,mentor_id) VALUES('Ali GOREN','YALE','1989-10-23',44,'Male',5);
 INSERT INTO authors(author_name,university,date_of_birth,h_index,gender,mentor_id) VALUES('Selim YAVUZ','STANFORD','1989-10-23',35,'Male',6);
-INSERT INTO authors(author_name,university,date_of_birth,h_index,gender,mentor_id) VALUES('Fatima DUMAN','ODTU','1989-10-23',44,'Male',2);
+INSERT INTO authors(author_name,university,date_of_birth,h_index,gender,mentor_id) VALUES('Fatima DUMAN','ODTU','1989-10-23',44,'Female',2);
 INSERT INTO authors(author_name,university,date_of_birth,h_index,gender,mentor_id) VALUES('Keynes BASTIK','BOGAZICI','1989-10-23',35,'Male',5);
-INSERT INTO authors(author_name,university,date_of_birth,h_index,gender,mentor_id) VALUES('JADE PEKANS','OXFORD','1989-10-23',44,'Male',8);
-INSERT INTO authors(author_name,university,date_of_birth,h_index,gender,mentor_id) VALUES('Fils AKIN','YALE','1989-10-23',44,'Male',7);
-INSERT INTO authors(author_name,university,date_of_birth,h_index,gender,mentor_id) VALUES('ADELA SUCU','YALE','1989-10-23',60,'Male',1);
-INSERT INTO authors(author_name,university,date_of_birth,h_index,gender,mentor_id) VALUES('Pekin YOLCU','STANFORD','1989-10-23',50,'Male',2);`
+INSERT INTO authors(author_name,university,date_of_birth,h_index,gender,mentor_id) VALUES('JADE PEKANS','OXFORD','1989-10-23',44,'Female',8);
+INSERT INTO authors(author_name,university,date_of_birth,h_index,gender,mentor_id) VALUES('Fils AKIN','YALE','1989-10-23',44,'Female',7);
+INSERT INTO authors(author_name,university,date_of_birth,h_index,gender,mentor_id) VALUES('ADELA SUCU','YALE','1989-10-23',60,'Female',1);
+INSERT INTO authors(author_name,university,date_of_birth,h_index,gender,mentor_id) VALUES('Pekin YOLCU','STANFORD','1989-10-23',50,'Female',2);`
     + authorsPapersInsert;
 
 connection.connect();
