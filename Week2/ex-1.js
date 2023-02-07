@@ -7,7 +7,8 @@ const connection = mysql.createConnection({
     multipleStatements: true
 });
 
-const createTableAuthors = `DROP TABLE  IF EXISTS authors;
+const createTableAuthors = `SET FOREIGN_KEY_CHECKS=0;
+DROP TABLE  IF EXISTS authors;
   CREATE  TABLE authors (author_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
           author_name VARCHAR (50) NOT NULL,
           university VARCHAR (100),
@@ -27,7 +28,6 @@ connection.query(alterTableAuthors, function (error) {
 });
 
 connection.end();
-
 
 
 
