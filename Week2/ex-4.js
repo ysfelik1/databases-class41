@@ -21,7 +21,7 @@ INNER JOIN authors on authors.author_id=authors_papers.author_id
 where authors.gender='Female';`;
 const averageHIndex = `SELECT AVG(h_index) as 'Average h-index',university FROM authors
 GROUP BY university;`;
-const paperPerUniversity = `SELECT count(authors_papers.paper_id),university  FROM authors_papers 
+const paperPerUniversity = `SELECT count(authors_papers.paper_id) as 'Number of Paper ',university  FROM authors_papers 
 INNER JOIN authors on authors.author_id=authors_papers.author_id
 GROUP BY university;`;
 const minMaxHIndex = `SELECT MIN(h_index) as 'Minimum h-index',MAX(h_index) as 'Maximum h-index',university FROM authors
