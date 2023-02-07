@@ -7,12 +7,12 @@ const connection = mysql.createConnection({
     multipleStatements: true
 });
 
-let randomInsert = '';
+let authorsPapersInsert = '';
 
 for (let i = 0; i < 29; i++) {
     let randomAuthorId = Math.floor(Math.random() * 15)+1;
     let randomPaperId = Math.floor(Math.random() * 30)+1;
-    randomInsert += `INSERT INTO authors_papers(paper_id,author_id) VALUES(${randomPaperId},${randomAuthorId});`
+    authorsPapersInsert += `INSERT INTO authors_papers(paper_id,author_id) VALUES(${randomPaperId},${randomAuthorId});`
 }
 
 const createTables = ` SET FOREIGN_KEY_CHECKS=0;  DROP TABLE  IF EXISTS research_Papers ;
@@ -73,7 +73,7 @@ INSERT INTO authors(author_name,university,date_of_birth,h_index,gender,mentor_i
 INSERT INTO authors(author_name,university,date_of_birth,h_index,gender,mentor_id) VALUES('Fils AKIN','YALE','1989-10-23',44,'Male',7);
 INSERT INTO authors(author_name,university,date_of_birth,h_index,gender,mentor_id) VALUES('ADELA SUCU','YALE','1989-10-23',60,'Male',1);
 INSERT INTO authors(author_name,university,date_of_birth,h_index,gender,mentor_id) VALUES('Pekin YOLCU','STANFORD','1989-10-23',50,'Male',2);`
-    + randomInsert;
+    + authorsPapersInsert;
 
 connection.connect();
 connection.query(createTables, function (error) {
