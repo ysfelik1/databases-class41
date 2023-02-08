@@ -11,12 +11,12 @@ connection.connect();
 const databaseMeetup = `CREATE DATABASE IF NOT EXISTS meetup;use meetup;DROP TABLE IF EXISTS invitee;`
 //creates invitee table and adds 5 row in it for each running
 const tableInvitee = `CREATE TABLE invitee(invitee_no INT  PRIMARY KEY AUTO_INCREMENT,
-  invitee_name CHAR(100) NOT NULL, invited_by INT NOT NULL );
-  INSERT INTO invitee (invitee_name,invited_by)VALUES ('Yusuf ELIK',1); 
-  INSERT INTO invitee(invitee_name, invited_by)VALUES ('Ali  ELIK',1); 
-  INSERT INTO invitee( invitee_name,  invited_by)VALUES ('Scarlett JOHANSSON',1);  
-   INSERT INTO   invitee ( invitee_name,  invited_by)VALUES ('Eva MENDEZ',1); 
-   INSERT INTO   invitee ( invitee_name,  invited_by)VALUES ('Angelina JULIE',1);`
+  invitee_name CHAR(100) NOT NULL, invited_by  CHAR(100) NOT NULL );
+  INSERT INTO invitee (invitee_name,invited_by)VALUES ('Yusuf ELIK','Yusuf ELIK'); 
+  INSERT INTO invitee(invitee_name, invited_by)VALUES ('Ali  ELIK','Yusuf ELIK'); 
+  INSERT INTO invitee( invitee_name,  invited_by)VALUES ('Scarlett JOHANSSON','Yusuf ELIK');  
+   INSERT INTO   invitee ( invitee_name,  invited_by)VALUES ('Eva MENDEZ','Scarlett JOHANSSON'); 
+   INSERT INTO   invitee ( invitee_name,  invited_by)VALUES ('Angelina JULIE','Scarlett JOHANSSON');`
 //creates room table and adds 5 row in it for each running
 const tableRoom = `SET FOREIGN_KEY_CHECKS=0;
   DROP TABLE IF EXISTS room;
