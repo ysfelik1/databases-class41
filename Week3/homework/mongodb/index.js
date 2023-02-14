@@ -17,9 +17,17 @@ async function createEpisodeExercise(client) {
    */
 
   // Write code that will add this to the collection!
+  const newEpisode = await client
+  .db('databaseWeek3').collection('bob_ross_episodes').insertOne({
+    episode: 'S09E13',
+    title: 'MOUNTAIN HIDE-AWAY',
+    elements: ['CIRRUS','CLOUDS','CONIFER','DECIDIOUS','GRASS','MOUNTAIN','MOUNTAINS','RIVER','SNOWY_MOUNTAIN','TREE','TREES',],
+  });
+
+
 
   console.log(
-    `Created season 9 episode 13 and the document got the id ${"TODO: fill in variable here"}`
+    `Created season 9 episode 13 and the document got the id ${newEpisode.insertedId}`
   );
 }
 
