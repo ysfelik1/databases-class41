@@ -113,9 +113,12 @@ async function deleteEpisodeExercise(client) {
    * It seems an errand episode has gotten into our data.
    * This is episode 14 in season 31. Please remove it and verify that it has been removed!
    */
-
+  const deleteOne= await client
+  .db("databaseWeek3")
+  .collection("bob_ross_episodes")
+  .deleteOne({ episode: "S31E14" });
   console.log(
-    `Ran a command to delete episode and it deleted ${"TODO: fill in variable here"} episodes`
+    `Ran a command to delete episode and it deleted ${deleteOne.deletedCount} episodes`
   );
 }
 
