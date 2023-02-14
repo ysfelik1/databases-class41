@@ -18,13 +18,11 @@ async function createEpisodeExercise(client) {
 
   // Write code that will add this to the collection!
   const newEpisode = await client
-  .db('databaseWeek3').collection('bob_ross_episodes').insertOne({
-    episode: 'S09E13',
-    title: 'MOUNTAIN HIDE-AWAY',
-    elements: ['CIRRUS','CLOUDS','CONIFER','DECIDIOUS','GRASS','MOUNTAIN','MOUNTAINS','RIVER','SNOWY_MOUNTAIN','TREE','TREES',],
-  });
-
-
+    .db('databaseWeek3').collection('bob_ross_episodes').insertOne({
+      episode: 'S09E13',
+      title: 'MOUNTAIN HIDE-AWAY',
+      elements: ['CIRRUS', 'CLOUDS', 'CONIFER', 'DECIDIOUS', 'GRASS', 'MOUNTAIN', 'MOUNTAINS', 'RIVER', 'SNOWY_MOUNTAIN', 'TREE', 'TREES',]
+    });
 
   console.log(
     `Created season 9 episode 13 and the document got the id ${newEpisode.insertedId}`
@@ -39,26 +37,42 @@ async function findEpisodesExercises(client) {
 
   // Find the title of episode 2 in season 2 [Should be: WINTER SUN]
 
-  console.log(
-    `The title of episode 2 in season 2 is ${"TODO: fill in variable here"}`
-  );
+  const myTitle = await client
+    .db('databaseWeek3').collection('bob_ross_episodes').findOne({
+      episode: 'S02E02'
+    });
+
+  console.log(`The title of episode 2 in season 2 is ${myTitle.title}`);
 
   // Find the season and episode number of the episode called "BLACK RIVER" [Should be: S02E06]
-
+  const myEpisode = await client
+    .db('databaseWeek3').collection('bob_ross_episodes').findOne({
+      title: 'BLACK RIVER'
+    });
   console.log(
-    `The season and episode number of the "BLACK RIVER" episode is ${"TODO: fill in variable here"}`
+    `The season and episode number of the "BLACK RIVER" episode is ${myEpisode.episode}`
   );
 
   // Find all of the episode titles where Bob Ross painted a CLIFF [Should be: NIGHT LIGHT, EVENING SEASCAPE, SURF'S UP, CLIFFSIDE, BY THE SEA, DEEP WILDERNESS HOME, CRIMSON TIDE, GRACEFUL WATERFALL]
-
+  const cliffs = await client
+    .db('databaseWeek3')
+    .collection('bob_ross_episodes')
+    .find({ elements: 'CLIFF' });
+  const cliffArray = await cliffs.toArray();
+  const allTitles = cliffArray.map((result) => result.title);
   console.log(
-    `The episodes that Bob Ross painted a CLIFF are ${"TODO: fill in variable here"}`
+    `The episodes that Bob Ross painted a CLIFF are ${allTitles}`
   );
 
   // Find all of the episode titles where Bob Ross painted a CLIFF and a LIGHTHOUSE [Should be: NIGHT LIGHT]
-
+  const cliffsAndLighthouses = await client
+    .db('databaseWeek3')
+    .collection('bob_ross_episodes')
+    .find({ elements: { $all: ['CLIFF', 'LIGHTHOUSE'] } });
+  const cliffsAndLighthousesArray = await cliffsAndLighthouses.toArray();
+  const allCliffsAndLighthouses = cliffsAndLighthousesArray.map((result) => result.title);
   console.log(
-    `The episodes that Bob Ross painted a CLIFF and a LIGHTHOUSE are ${"TODO: fill in variable here"}`
+    `The episodes that Bob Ross painted a CLIFF and a LIGHTHOUSE are ${allCliffsAndLighthouses}`
   );
 }
 
