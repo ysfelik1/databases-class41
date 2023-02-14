@@ -85,17 +85,26 @@ async function updateEpisodeExercises(client) {
    */
 
   // Episode 13 in season 30 should be called BLUE RIDGE FALLS, yet it is called BLUE RIDGE FALLERS now. Fix that
-
+  const updateOne = await client
+  .db('databaseWeek3')
+  .collection('bob_ross_episodes')
+  .updateOne(
+    { episode: 'S30E13' },
+    {$set: {title: 'BLUE RIDGE FALLS'}}
+  );
   console.log(
-    `Ran a command to update episode 13 in season 30 and it updated ${"TODO: fill in variable here"} episodes`
+    `Ran a command to update episode 13 in season 30 and it updated ${updateOne.modifiedCount} episodes`
   );
 
   // Unfortunately we made a mistake in the arrays and the element type called 'BUSHES' should actually be 'BUSH' as sometimes only one bush was painted.
   // Update all of the documents in the collection that have `BUSHES` in the elements array to now have `BUSH`
   // It should update 120 episodes!
-
+  const updateMany = await client
+  .db("databaseWeek3")
+  .collection("bob_ross_episodes")
+  .updateMany({ elements: "BUSHES" }, { $set: { "elements.$": "BUSH" } });
   console.log(
-    `Ran a command to update all the BUSHES to BUSH and it updated ${"TODO: fill in variable here"} episodes`
+    `Ran a command to update all the BUSHES to BUSH and it updated ${updateMany.modifiedCount} episodes`
   );
 }
 
