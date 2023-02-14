@@ -27,7 +27,7 @@ getPopulation("city", "' OR 1=1;", " OR 1=1;", console.log);
 function getPopulationNew(Country, name, code, cb) {
   // assuming that connection to the database is established and stored as conn
   connection.query(
-    `SELECT Population FROM ? WHERE Name = ? and code = ?`,
+    `SELECT Population FROM ${connection.escape(Country)} WHERE Name = '${connection.escape(name)}' and code = '${connection.escape(code)}'`,
     [Country, name, code],
     function (err, result) {
       if (err) cb(err);
