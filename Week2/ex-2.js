@@ -7,13 +7,55 @@ const connection = mysql.createConnection({
     multipleStatements: true
 });
 
-let authorsPapersInsert = '';
+const authorsPapersInsert = `INSERT INTO authors_papers(paper_id,author_id) VALUES(1,9);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(1,8);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(2,1);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(2,2);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(3,3);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(3,4);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(4,7);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(4,8);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(5,6);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(5,10);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(6,5);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(6,7);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(7,11);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(7,1);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(8,4);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(8,9);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(9,15);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(9,14);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(10,12);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(10,13);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(11,12);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(11,13);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(11,1);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(12,2);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(12,3);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(13,4);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(13,5);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(14,6);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(14,7);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(15,8);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(15,9);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(16,10);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(16,11);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(17,12);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(17,13);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(18,14);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(19,15);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(20,1);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(21,2);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(22,4);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(23,5);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(24,6);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(25,7);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(26,8);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(27,9);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(28,10);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(29,11);
+INSERT INTO authors_papers(paper_id,author_id) VALUES(30,13);`;
 
-for (let i = 0; i <29; i++) {
-    let randomAuthorId = Math.floor(Math.random() * 15)+1;
-    let randomPaperId = Math.floor(Math.random() * 30)+1;
-    authorsPapersInsert += `INSERT INTO authors_papers(paper_id,author_id) VALUES(${randomPaperId},${randomAuthorId});`
-}
 
 const createTables = ` SET FOREIGN_KEY_CHECKS=0;  DROP TABLE  IF EXISTS research_Papers ;
 CREATE  TABLE research_Papers  (paper_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -58,7 +100,7 @@ INSERT INTO research_papers(paper_title,conference,publish_date) VALUES('LK Deve
 INSERT INTO research_papers(paper_title,conference,publish_date) VALUES('AS management Tech','Conference 1','2020-03-20');
 INSERT INTO research_papers(paper_title,conference,publish_date) VALUES('RB Development Tech','Conference 1','2019-01-24');
 
-INSERT INTO authors(author_name,university,date_of_birth,h_index,gender) VALUES('Yusuf ELIK','YALE','1989-10-23',44,'Male');
+INSERT INTO authors(author_name,university,date_of_birth,h_index,gender,mentor_id) VALUES('Yusuf ELIK','YALE','1989-10-23',44,'Male',1);
 INSERT INTO authors(author_name,university,date_of_birth,h_index,gender,mentor_id) VALUES('Ahmet ELIK','YALE','1989-10-23',40,'Male',1);
 INSERT INTO authors(author_name,university,date_of_birth,h_index,gender,mentor_id) VALUES('Mehmet ELIK','MIT','1989-10-23',55,'Male',2);
 INSERT INTO authors(author_name,university,date_of_birth,h_index,gender,mentor_id) VALUES('Mike STONE','YALE','1989-10-23',44,'Male',1);
