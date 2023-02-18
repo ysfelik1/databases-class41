@@ -1,15 +1,19 @@
-const fs = require('fs');
-const csv = require('csv-parser');
+import fs from 'fs';
+import csvParser from 'csv-parser';
 
-const myObject = {};
+const results = [];
 
-fs.createReadStream('path/to/your/csv/file.csv')
-  .pipe(csv())
+fs.createReadStream('population_pyramid_1950-2022.csv')
+  .pipe(csvParser())
   .on('data', (data) => {
-    const key = data.column1;
-    const value = data.column2;
-    myObject[key] = value;
+    const { Country, Year, Age, M, F } = data;
+    results.push({ Country, Year, Age, M, F });
   })
   .on('end', () => {
-    console.log(myObject); // This will output an object with key-value pairs based on the CSV data
+    console.log(results);
   });
+
+
+
+
+
