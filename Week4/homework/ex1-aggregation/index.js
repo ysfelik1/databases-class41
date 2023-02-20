@@ -3,7 +3,7 @@ import csvParser from 'csv-parser';
 
 const dotenv = await import('dotenv');
 dotenv.config();
-import { MongoClient } from  'mongodb';
+import { MongoClient } from 'mongodb';
 
 const results = [];
 
@@ -40,15 +40,16 @@ async function getTotalPopulationByYear(country, client) {
       $sort: { _id: 1 },
     },
   ];
-  const result = await client
+  const cursor = await client
     .db('databaseWeek4')
     .collection('populations')
     .aggregate(pipeline)
     .toArray();
 
-  console.log(result);
+  console.log(`Total population of ${country} per year;`);
+  console.log(cursor);
 }
- function getDataCSV() {
+function getDataCSV() {
 
   fs.createReadStream('population_pyramid_1950-2022.csv')
     .pipe(csvParser())
@@ -60,7 +61,42 @@ async function getTotalPopulationByYear(country, client) {
       console.log('CSV file has read');
     });
 }
+async function getTotalPopulationOfContinents(year, age, client) {
+  const pipelineContinents = [
+    {
+      $addFields: {
+        M: { $toInt: "$M" },
+        F: { $toInt: "$F" },
+        TotalPopulation: { $add: [{ $toInt: "$M" }, { $toInt: "$F" }] }
+      }
+    },
+    {
+      $match: {
+        Country: {
+          $in: [
+            'AFRICA',
+            'ASIA',
+            'EUROPE',
+            'LATIN AMERICA AND THE CARIBBEAN',
+            'NORTHERN AMERICA',
+            'OCEANIA',
+          ],
+        },
+        Year: year,
+        Age: age
+      }
+    }
+  ];
 
+  const cursor = await client
+    .db('databaseWeek4')
+    .collection('populations')
+    .aggregate(pipelineContinents)
+    .toArray();
+  console.log(`Information of each continent for year:${year} and age group:${age};`);
+  console.log(cursor);
+
+}
 async function main() {
   if (process.env.MONGODB_URL == null) {
     throw Error(
@@ -73,13 +109,14 @@ async function main() {
   });
   const session = client.startSession();
   try {
-    
+
     await session.withTransaction(async () => {
-      await insertData(client);
-    
+    // await insertData(client);
+
       await getTotalPopulationByYear('Netherlands', client);
+      await getTotalPopulationOfContinents('2020', '100+', client)
     });
-    
+
   } catch (err) {
     console.error(err);
   } finally {
