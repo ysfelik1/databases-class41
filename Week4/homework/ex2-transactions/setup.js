@@ -17,7 +17,6 @@ export async function createCollection(collectionData, collectionName) {
         await client.connect(); // Establish the connection before inserting data
 
         // Clean up the accounts collection\
-        await client.connect();
         const database = client.db('databaseWeek4');
         const collection = database.collection(`${collectionName}`);
 
