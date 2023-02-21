@@ -19,33 +19,69 @@ export async function transferMoney(sender, receiver, amount, remark) {
         const database = client.db('databaseWeek4');
         const collection = database.collection(`accounts`);
 
-        const senderAccount=collection.find({ account_number: sender }).toArray();
-        const receiverAccount=collection.find({ account_number: sender }).toArray();
+      
 
         await session.withTransaction(async () => {
-            //update balances
-            await collection.updateOne(
-                { account_number: sender },
-                {$inc: { balance: -amount } }
+            // Update sender's account
+            const senderAccount = await collection.findOneAndUpdate(
+              { account_number: sender },
+              {
+                $inc: { balance: -amount },
+                $push: {
+                  account_changes: {
+                    change_number: await getNextChangeNumber(sender,collection),
+                    amount: -amount,
+                    remark: remark,
+                    changed_date: new Date()
+                  }
+                }
+              },
+              { returnOriginal: false, session }
             );
-
-            await collection.updateOne(
+        
+            // Update receiver's account
+            const receiverAccount = await collection.findOneAndUpdate(
                 { account_number: receiver },
-                {$inc: { balance: amount } }
-            );
-
+                {
+                  $inc: { balance: amount },
+                  $push: {
+                    account_changes: {
+                      change_number: await getNextChangeNumber(receiver,collection),
+                      amount: amount,
+                      remark: remark,
+                      changed_date: new Date()
+                    }
+                  }
+                },
+                { returnOriginal: false, session }
+              );
+        
             console.log(
-                `$${amount} transferred from account ${sender} to account ${receiver} (${remark}). `
+              `$${amount} transferred from account ${sender} to account ${receiver} (${remark}). `
             );
-        });
+          });
+          await session.commitTransaction();
 
     } catch (error) {
         console.log(error);
+        await session.abortTransaction();
     } finally {
         session.endSession();
         await client.close(); // Always close the connection when done
     }
-
+  
+    
 }
+async function getNextChangeNumber(accountNumber,collection) {
+    const result = await collection.aggregate([
+      { $match: { account_number: accountNumber } },
+      { $unwind: "$account_changes" },
+      { $sort: { "account_changes.change_number": -1 } },
+      { $limit: 1 },
+      { $project: { "account_changes.change_number": 1, _id: 0 } }
+    ]).next();
+  
+    return result ? result.account_changes.change_number + 1 : 1;
+  }
 
 transferMoney(101,102,1000,'Rent');

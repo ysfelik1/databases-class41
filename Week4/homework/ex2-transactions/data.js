@@ -6,7 +6,7 @@ export const accountsData = [
         {
           change_number: 1,
           amount: 3000,
-          changed_date: '02.01.2023',
+          changed_date: '2023-02-21T20:00:00.000+00:00',
           remark: 'monthly payment',
         },
       ],
@@ -18,13 +18,13 @@ export const accountsData = [
         {
           change_number: 1,
           amount: 3000,
-          changed_date: '02.01.2023',
+          changed_date: '2023-02-21T20:00:00.000+00:00',
           remark: 'monthly payment',
         },
         {
           change_number: 2,
           amount: 1000,
-          changed_date: '02.20.2023',
+          changed_date: '2023-02-22T20:00:00.000+00:00',
           remark: 'bonus',
         },
       ],
@@ -36,7 +36,7 @@ export const accountsData = [
         {
           change_number: 1,
           amount: 3000,
-          changed_date: '02.01.2023',
+          changed_date: '2023-02-21T20:00:00.000+00:00',
           remark: 'monthly payment',
         },
       ],
@@ -48,7 +48,7 @@ export const accountsData = [
         {
           change_number: 1,
           amount: 3000,
-          changed_date: '02.01.2023',
+          changed_date: '2023-02-21T20:00:00.000+00:00',
           remark: 'monthly payment',
         },
       ],
@@ -60,7 +60,7 @@ export const accountsData = [
         {
           change_number: 1,
           amount: 3000,
-          changed_date: '02.01.2023',
+          changed_date: '2023-02-21T20:00:00.000+00:00',
           remark: 'monthly payment',
         },
       ],
