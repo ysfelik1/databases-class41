@@ -83,5 +83,3 @@ async function getNextChangeNumber(accountNumber,collection) {
   
     return result ? result.account_changes.change_number + 1 : 1;
   }
-
-transferMoney(101,102,1000,'Rent');
