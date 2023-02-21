@@ -58,6 +58,7 @@ export async function transferMoney(sender, receiver, amount, remark) {
     await session.commitTransaction();
     console.log(`$${amount} transferred from account ${sender} to account ${receiver} (${remark}).`);
   } catch (error) {
+    await session.abortTransaction();
     console.log(error);
   } finally {
     await client.close(); // Always close the connection when done
