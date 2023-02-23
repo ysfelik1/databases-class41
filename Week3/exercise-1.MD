@@ -4,7 +4,7 @@
 1. What columns violate 1NF?
 food_description and food_code columns have multiple values.
 2. What entities do you recognize that could be extracted?
-We do not need dinner_id and venue_code
+We do not need dinner_id,member_id,food_code and venue_code
 3. Name all the tables and columns that would make a 3NF compliant solution.
 
 Members
